@@ -34,43 +34,34 @@
                         <h4 class="header-prof-sec code">Code examples</h4>
                         <pre>
                             <code>
-const tabs = (headerSelector,tabSelector,tabContentSelector,classActive,display = 'block') => {
-    const header = document.querySelector(headerSelector),
-            content = document.querySelectorAll(tabContentSelector),
-            tab = document.querySelectorAll(tabSelector);
+window.addEventListener('DOMContentLoaded',()=>{
+    "use strict";
 
-    function hide() {
-        content.forEach((item)=>{
-            item.style.display = 'none';
-        });
-
-        tab.forEach((item)=>{
-            item.classList.remove(classActive);
-        });
-    }
-    function show(i = 0) {
-        content[i].style.display = display;
-        tab[i].classList.add(classActive);
-    }
-
-    header.addEventListener('click',(e)=>{
-        const target = e.target;
-        if( target &&
-            (target.classList.contains(tabSelector.replace(/\./, '')) ||
-            target.parentNode.classList.contains(tabSelector.replace(/\./, '')))) {
-            tab.forEach((item,i)=>{
-                if(item === target || item == target.parentNode){
-                    hide();
-                    show(i); 
+    function increaseIcon(selectorBtn,selectorImg,selText){
+        let img = document.querySelectorAll(selectorImg),
+            btn = document.querySelectorAll(selectorBtn),
+            textBlock = document.querySelectorAll(selText);
+    
+        btn.forEach((item,i)=>{
+            item.addEventListener("mouseover",(e)=>{
+                e.preventDefault();
+                img[i].classList.add('email-section__btn__img_hover');
+                if(textBlock.length){
+                    textBlock[i].style.backgroundColor = "#009CC2";
                 }
             });
-        }
-    });
-    hide();
-    show();
-};
-
-export default tabs;
+            item.addEventListener("mouseout",(e)=>{
+                e.preventDefault();
+                img[i].classList.remove('email-section__btn__img_hover');
+                if(textBlock.length){
+                    textBlock[i].style.backgroundColor = "#00AFDB";
+                }
+            });
+        });
+    }
+    increaseIcon('.email-section__btn','.email-section__btn__img');
+    increaseIcon('.download__block-btn__btn','.download__block-btn__block-img__img','.download__block-btn__text');
+});
                             </code>
                         </pre>
                     </div>  
